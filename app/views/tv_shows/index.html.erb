@@ -1,0 +1,51 @@
+
+<h1>Tv Shows Listing</h1>
+ 
+<table>
+  <tr>
+    <th>name</th>
+    <th>Channel</th>
+    <th>Show Timing</th>
+    <th></th>
+  </tr>
+ 
+  <% @tv_shows.each do |tv_show| %>
+    <tr>
+      <td><%= tv_show.name %></td>
+      <td><%= tv_show.tv_channel.name %></td>
+      <td><%= tv_show.timing.strftime("%d %m %I:%M %p") %></td>
+      <td>
+        <% if user_signed_in?%>
+          <% if favourite_helper(current_user,tv_show)%>
+            <%= link_to('UnMark as favourite',
+                unmark_favourite_path(
+                  :user_id => current_user.id,
+                  :tv_show_id => tv_show.id
+                ))%>
+            <% if reminder_helper(current_user,tv_show)%>
+              <%= link_to('UnSet reminder',
+                  unset_reminder_path(
+                    :user_id => current_user.id,
+                    :tv_show_id => tv_show.id
+                  ))%>
+            <% else %>
+              <%= link_to('Set Reminder',
+                  set_reminder_path(
+                    :user_id => current_user.id,
+                    :tv_show_id => tv_show.id
+                  ))%>
+            <% end %>
+          <% else %>
+            <%= link_to('Mark as favourite',
+                mark_favourite_path(
+                  :user_id => current_user.id,
+                  :tv_show_id => tv_show.id
+                ))%>
+          <% end %>
+        <% else %>
+          must to log in
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

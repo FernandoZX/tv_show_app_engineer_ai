@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: tv_shows
+#
+#  id            :bigint           not null, primary key
+#  name          :string
+#  timing        :datetime
+#  tv_channel_id :bigint           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  timing: 2020-02-19 14:54:42
+  channel: one
+
+two:
+  name: MyString
+  timing: 2020-02-19 14:54:42
+  channel: two
